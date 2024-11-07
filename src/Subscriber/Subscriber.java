@@ -10,7 +10,7 @@ public class Subscriber implements RiskEventListener {
     }
 
     @Override
-    public void updateContext(RiskCategory riskLevel) {
+    public void onRiskLevelUpdate(RiskCategory riskLevel) {
         System.out.println("Alert for " + name + ": risk level in the region is " + riskLevel.getLabel());
     }
 }
