@@ -1,10 +1,10 @@
 package Publisher;
 
 public enum RiskCategory {
-    SEVERE("Grave"),
-    ABOVE_AVERAGE("Acima da média"),
-    STANDARD("Normal"),
-    LOW("Baixo");
+    SEVERE("Severe"),
+    ABOVE_AVERAGE("Above Average"),
+    STANDARD("Standard"),
+    LOW("Low");
 
     private final String label;
 

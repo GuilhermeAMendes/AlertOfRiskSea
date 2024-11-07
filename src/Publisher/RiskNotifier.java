@@ -33,9 +33,7 @@ public class RiskNotifier implements RiskEventPublisher<Subscriber> {
 
     @Override
     public void notifyAllSubscribers () {
-        for (Subscriber s : subscribers) {
-            s.onRiskLevelUpdate(currentRiskLevel);
-        }
+        subscribers.forEach(subscriber -> subscriber.onRiskLevelUpdate(currentRiskLevel));
     }
 
     public void updateRiskLevel(RiskCategory newLevel){
