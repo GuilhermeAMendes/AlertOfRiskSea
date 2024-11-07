@@ -4,9 +4,9 @@ import Subscriber.Subscriber;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RiskNotifier implements RiskEventPublisher {
+public class RiskNotifier implements RiskEventPublisher<Subscriber> {
     private static RiskNotifier instance;
-    private List<Subscriber> subscribers = new ArrayList<>();
+    private final List<Subscriber> subscribers = new ArrayList<>();
     private RiskCategory currentRiskLevel;
 
     private RiskNotifier(){
@@ -14,16 +14,20 @@ public class RiskNotifier implements RiskEventPublisher {
     }
 
     public static RiskNotifier getInstance(){
-        return instance == null ? instance = new RiskNotifier() : instance;
+        if (instance == null) instance = new RiskNotifier();
+        return instance;
     }
 
     @Override
     public void addSubscriber(Subscriber subscriber){
+        if (subscriber == null) throw new IllegalArgumentException("Subscriber cannot be null");
         subscribers.add(subscriber);
     }
 
     @Override
     public void removeSubscriber(Subscriber subscriber){
+        if (subscriber == null) throw new IllegalArgumentException("Subscriber cannot be null");
+        if (!subscribers.contains(subscriber)) throw new IllegalArgumentException("Subscriber not in list");
         subscribers.remove(subscriber);
     }
 
@@ -35,7 +39,8 @@ public class RiskNotifier implements RiskEventPublisher {
     }
 
     public void updateRiskLevel(RiskCategory newLevel){
-        this.currentRiskLevel = newLevel;
+        currentRiskLevel = newLevel;
+        if (subscribers.isEmpty()) return;
         notifyAllSubscribers();
     }
 }
