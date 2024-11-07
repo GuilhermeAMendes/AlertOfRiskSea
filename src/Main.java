@@ -7,24 +7,23 @@ import java.util.Random;
 public class Main {
     public static void main(String[] args) {
         RiskNotifier app = RiskNotifier.getInstance();
+        RiskCategory[] riskLevels = RiskCategory.values();
         Random random = new Random();
 
-        Subscriber subscriber1 = new Subscriber("g",app);
-        Subscriber subscriber2 = new Subscriber("a",app);
-        Subscriber subscriber3 = new Subscriber("l",app);
+        Subscriber subscriber1 = new Subscriber("g");
+        Subscriber subscriber2 = new Subscriber("a");
+        Subscriber subscriber3 = new Subscriber("l");
 
-        subscriber1.subscribe();
-        subscriber2.subscribe();
-        subscriber3.subscribe();
+        app.addSubscriber(subscriber1);
+        app.addSubscriber(subscriber2);
+        app.addSubscriber(subscriber3);
 
-        RiskCategory[] riskLevels = RiskCategory.values();
 
         for (int i = 0; i < 10; i++) {
-            if (i == 3) subscriber3.unsubscribe();
-
-            if (i == 5) subscriber3.subscribe();
+            if(i == 3) app.removeSubscriber(subscriber3);
+            if(i == 5) app.addSubscriber(subscriber3);
             RiskCategory newRiskLevel = riskLevels[random.nextInt(riskLevels.length)];
-            System.out.println("\n--- Atualizando o nível de risco para: " + newRiskLevel + " ---");
+            System.out.println("\n--- Atualizando o nível de risco para: " + newRiskLevel.getLabel() + " ---\n");
             app.updateRiskLevel(newRiskLevel);
 
             try {
@@ -35,8 +34,8 @@ public class Main {
             }
         }
 
-        subscriber1.unsubscribe();
-        subscriber2.unsubscribe();
+        app.removeSubscriber(subscriber1);
+        app.removeSubscriber(subscriber2);
         System.out.println("\nFim da simulação.");
     }
 }

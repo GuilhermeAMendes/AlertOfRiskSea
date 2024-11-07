@@ -3,5 +3,5 @@ package Subscriber;
 import Publisher.RiskCategory;
 
 public interface RiskEventListener {
-    void updateContext(RiskCategory riskLevel);
+    void updateContextOf(RiskCategory riskLevel);
 }
