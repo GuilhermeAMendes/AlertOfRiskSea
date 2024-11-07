@@ -2,8 +2,8 @@ package Publisher;
 
 import Subscriber.Subscriber;
 
-public interface RiskEventPublisher {
-    void addSubscriber(Subscriber subscriber);
-    void removeSubscriber(Subscriber subscriber);
+public interface RiskEventPublisher<T> {
+    void addSubscriber(T subscriber);
+    void removeSubscriber(T subscriber);
     void notifyAllSubscribers();
 }
