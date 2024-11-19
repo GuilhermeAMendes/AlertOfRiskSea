@@ -1,6 +1,8 @@
 package Publisher;
 
 import Subscriber.Subscriber;
+import Utils.ValidationsUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,14 +22,14 @@ public class RiskNotifier implements RiskEventPublisher<Subscriber> {
 
     @Override
     public void addSubscriber(Subscriber subscriber){
-        if (subscriber == null) throw new IllegalArgumentException("Subscriber cannot be null");
+        ValidationsUtils.validateNotNull(subscriber, "Subscriber cannot be null");
         subscribers.add(subscriber);
     }
 
     @Override
     public void removeSubscriber(Subscriber subscriber){
-        if (subscriber == null) throw new IllegalArgumentException("Subscriber cannot be null");
-        if (!subscribers.contains(subscriber)) throw new IllegalArgumentException("Subscriber not in list");
+        ValidationsUtils.validateNotNull(subscriber, "Subscriber cannot be null");
+        ValidationsUtils.validateExistsInList(subscriber,subscribers,"Subscriber not in list");
         subscribers.remove(subscriber);
     }
 
