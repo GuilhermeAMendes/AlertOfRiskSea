@@ -36,7 +36,7 @@ public class RiskNotifier implements Subject<Observer> {
 
     @Override
     public void notifyAllSubscribers () {
-        if (ValidationsUtils.validadeIsNotEmpty(subscribers)) return;
+        if (ValidationsUtils.validateIsNotEmpty(subscribers)) return;
         subscribers.forEach(subscriber -> subscriber.onRiskLevelUpdate(currentRiskLevel));
     }
 

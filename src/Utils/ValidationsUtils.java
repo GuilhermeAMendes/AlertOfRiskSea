@@ -11,7 +11,7 @@ public class ValidationsUtils {
         if (!list.contains(obj)) throw new IllegalArgumentException(message);
     }
 
-    public static <T> boolean validadeIsNotEmpty(List<T> list){
+    public static <T> boolean validateIsNotEmpty(List<T> list){
        return list.isEmpty();
     }
 }
