@@ -35,12 +35,12 @@ public class RiskNotifier implements RiskEventPublisher<Subscriber> {
 
     @Override
     public void notifyAllSubscribers () {
+        if (ValidationsUtils.validadeIsNotEmpty(subscribers)) return;
         subscribers.forEach(subscriber -> subscriber.onRiskLevelUpdate(currentRiskLevel));
     }
 
     public void updateRiskLevel(RiskCategory newLevel){
         currentRiskLevel = newLevel;
-        if (subscribers.isEmpty()) return;
         notifyAllSubscribers();
     }
 }

@@ -10,4 +10,8 @@ public class ValidationsUtils {
     public static <T> void validateExistsInList(T obj, List<T> list, String message){
         if (!list.contains(obj)) throw new IllegalArgumentException(message);
     }
+
+    public static <T> boolean validadeIsNotEmpty(List<T> list){
+       return list.isEmpty();
+    }
 }
