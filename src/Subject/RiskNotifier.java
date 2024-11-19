@@ -1,14 +1,15 @@
-package Publisher;
+package Subject;
 
-import Subscriber.Subscriber;
+import Observer.Observer;
+
 import Utils.ValidationsUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RiskNotifier implements RiskEventPublisher<Subscriber> {
+public class RiskNotifier implements Subject<Observer> {
     private static RiskNotifier instance;
-    private final List<Subscriber> subscribers = new ArrayList<>();
+    private final List<Observer> subscribers = new ArrayList<>();
     private RiskCategory currentRiskLevel;
 
     private RiskNotifier(){
@@ -21,13 +22,13 @@ public class RiskNotifier implements RiskEventPublisher<Subscriber> {
     }
 
     @Override
-    public void addSubscriber(Subscriber subscriber){
+    public void addSubscriber(Observer subscriber){
         ValidationsUtils.validateNotNull(subscriber, "Subscriber cannot be null");
         subscribers.add(subscriber);
     }
 
     @Override
-    public void removeSubscriber(Subscriber subscriber){
+    public void removeSubscriber(Observer subscriber){
         ValidationsUtils.validateNotNull(subscriber, "Subscriber cannot be null");
         ValidationsUtils.validateExistsInList(subscriber,subscribers,"Subscriber not in list");
         subscribers.remove(subscriber);

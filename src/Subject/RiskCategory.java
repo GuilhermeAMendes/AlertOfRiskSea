@@ -1,4 +1,4 @@
-package Publisher;
+package Subject;
 
 public enum RiskCategory {
     SEVERE("Severe"),
